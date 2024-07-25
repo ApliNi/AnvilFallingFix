@@ -1,6 +1,6 @@
-name: AnvilRepair
-version: '1.0-SNAPSHOT'
-main: io.github.aplini.anvilRepair.AnvilRepair
+name: AnvilFallingFix
+version: '1.1'
+main: io.github.aplini.anvilFallingFix.AnvilFallingFix
 api-version: '1.21'
 authors: [ ApliNi ]
 website: https://github.com/aplini/

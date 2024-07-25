@@ -1,15 +1,14 @@
-package io.github.aplini.anvilRepair;
+package io.github.aplini.anvilFallingFix;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class AnvilRepair extends JavaPlugin implements Listener {
+public final class AnvilFallingFix extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
@@ -24,19 +23,19 @@ public final class AnvilRepair extends JavaPlugin implements Listener {
     @EventHandler
     public void onBlockBreak2(EntityDropItemEvent event) {
 
-        // 掉落物是铁砧
-        if(event.getItemDrop().getItemStack().getType() != Material.ANVIL){
+        // 要求掉落物属于铁砧
+        if(!event.getItemDrop().getItemStack().getType().toString().endsWith("ANVIL")){
             return;
         }
 
         Location itemLocation = event.getEntity().getLocation();
 
-        // y 轴约等于 0
+        // 要求 y 轴约等于 0
         if(Math.abs(itemLocation.y()) >= 1e-10){
             return;
         }
 
-        // 当前位置为铁砧
+        // 要求当前位置上的方块属于铁砧
         if(!itemLocation.getBlock().getType().toString().endsWith("ANVIL")){
             return;
         }
@@ -44,7 +43,7 @@ public final class AnvilRepair extends JavaPlugin implements Listener {
         Location nextBlockLocation = itemLocation.clone().subtract(0, 1, 0);
         Block nextBlock = nextBlockLocation.getBlock();
 
-        // 下面一个方块属于铁砧
+        // 要求下面一个方块属于铁砧
         if(!nextBlock.getType().toString().endsWith("ANVIL")){
             return;
         }
